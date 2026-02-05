@@ -1,14 +1,20 @@
 extends Area2D
-var is_open := false
+
+@export var possible_items: Array[PackedScene] = []
+
 @onready var canvas_group: CanvasGroup = $CanvasGroup
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func open() -> void: 
-	animation_player.play("open")
 	if animation_player.assigned_animation == ("open"):
 		return
 	input_pickable = false
-
+	animation_player.play("open")
+	if possible_items.is_empty():
+		return
+	for current_index in range(randi_range(1, 3)):
+		_spawn_random_item()
+	
 func _input_event(viewport: Viewport, event: InputEvent, shape_index:int):
 	var event_is_mouse_click: bool = (
 		event is InputEventMouseButton and
@@ -34,3 +40,11 @@ func _on_mouse_exited() -> void:
 func set_outline_thickness(new_thickness: float) -> void:
 	canvas_group.material.set_shader_parameter("line_thickness", new_thickness)
 	
+func _spawn_random_item() -> void:
+	var loot_item:Area2D = possible_items.pick_random().instantiate()
+	add_child(loot_item)
+	
+	var random_angle := randf_range(0.0, 2.0 * PI)
+	var random_direction := Vector2(1.0, 0.0).rotated(random_angle)
+	var random_distance := randf_range(60.0, 120.0)
+	loot_item.position = random_direction * random_distance
