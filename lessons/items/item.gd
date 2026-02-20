@@ -4,7 +4,8 @@ extends Area2D
 
 func _ready() -> void:
 	play_floating_animation()
-
+	get_viewport().physics_object_picking_sort = true
+	get_viewport().physics_object_picking_first_only = true
 
 func play_floating_animation() -> void:
 	var tween := create_tween()
@@ -18,4 +19,19 @@ func play_floating_animation() -> void:
 	tween.tween_property(sprite_2d, "position", position_offset, duration)
 	tween.tween_property(sprite_2d, "position",  -1.0 * position_offset, duration)
 
+func _input_event(viewport: Viewport, event: InputEvent, shape_index:int):
+	var event_is_mouse_click: bool = (
+		event is InputEventMouseButton and
+		event.button_index == MOUSE_BUTTON_LEFT and 
+		event.is_pressed()
+	)
+	if event_is_mouse_click:
+		pop() 
+		pass
+		
+func pop() -> void:
 
+	var tween := create_tween()	
+	tween.set_parallel()
+	tween.tween_property(self, "scale", Vector2(1000.0, 1000.0), 2.0)
+	tween.finished.connect(queue_free)

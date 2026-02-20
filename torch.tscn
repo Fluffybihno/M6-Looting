@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dogvkmxwjaa10"]
+
+[ext_resource type="PackedScene" uid="uid://eundh35r605v" path="res://assets/torch/torch.tscn" id="1_pa17o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1444"]
+size = Vector2(16, 56.5)
+
+[node name="Torch" type="Area2D"]
+
+[node name="Torch" parent="." instance=ExtResource("1_pa17o")]
+position = Vector2(839, 557)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(839, 553)
+shape = SubResource("RectangleShape2D_s1444")

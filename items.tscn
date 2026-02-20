@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl8g8kbryktc7"]
+
+[ext_resource type="Script" uid="uid://cxnbvti5lbrcm" path="res://items.gd" id="1_g7036"]
+[ext_resource type="Texture2D" uid="uid://bayg35bajtsiq" path="res://lessons/items/apple.png" id="2_3grub"]
+[ext_resource type="Texture2D" uid="uid://cncnriir6hyt1" path="res://lessons/items/key.png" id="3_cy7rr"]
+[ext_resource type="Texture2D" uid="uid://bsiupn6cle8sm" path="res://lessons/items/potion.png" id="4_rofvq"]
+
+[node name="Items" type="Area2D"]
+script = ExtResource("1_g7036")
+
+[node name="Apple" type="Sprite2D" parent="."]
+position = Vector2(912, 172)
+texture = ExtResource("2_3grub")
+
+[node name="Key" type="Sprite2D" parent="."]
+position = Vector2(801, 176)
+texture = ExtResource("3_cy7rr")
+
+[node name="Potion" type="Sprite2D" parent="."]
+position = Vector2(1012, 178)
+texture = ExtResource("4_rofvq")

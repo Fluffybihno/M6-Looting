@@ -15,6 +15,14 @@ func open() -> void:
 	for current_index in range(randi_range(1, 3)):
 		_spawn_random_item()
 	
+func pop() -> void:
+	if animation_player.assigned_animation == ("pop"):
+		return
+	input_pickable = true
+	animation_player.play("pop")
+	if possible_items.is_empty():
+		queue_free()
+	
 func _input_event(viewport: Viewport, event: InputEvent, shape_index:int):
 	var event_is_mouse_click: bool = (
 		event is InputEventMouseButton and
@@ -23,6 +31,10 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_index:int):
 	)
 	if event_is_mouse_click:
 		open()
+		
+	if event_is_mouse_click:
+		pop() 
+		pass
 
 func _ready() -> void:
 	canvas_group.material.set_shader_parameter("line_thickness", 3.0)
